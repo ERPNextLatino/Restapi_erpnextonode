@@ -2,10 +2,28 @@
 Este modulo esta diseñado para consumir a la API REST de APIRESTERPNext V10+ usala para consumir los servicios de su APIRESTERPNext, esta libreria esta realizada apartir de la base y aporte de  pawanpandey4zip y pawangspandey,
 basandonos en la documentacion de frape y dandole opcion a los desarrolladores MEAN se hace publica esta libreria con el fin de reusarla y mejorarla 
 
-# Introducción
+# Dice frappe en su Documentación
 Frappe.io se envía con una API HTTP que se puede clasificar en Llamadas a procedimiento remoto (RPC), para llamar a los métodos de la lista blanca y la transferencia de estado representacional (REST), para manipular recursos.
 
 La URL base es https: // {su instancia de frappe}. Todas las solicitudes que se muestran aquí deben agregarse al final de su URL base. Por ejemplo, si su instancia es demo.erpnext.com, GET / api / resource / User significa GET https://demo.erpnext.com/api/resource/User.
+
+Todos los documentos en Frappe están disponibles a través de una API RESTful con el prefijo / api / resource /. Puede realizar todas las operaciones de CRUD en ellos:
+
+## Crear
+
+Puede crear un documento enviando una solicitud POST al punto final, / api / resource / {doctype}.
+
+## Leer
+
+Puede obtener un documento por su nombre utilizando el punto final, / api / resource / {doctype} / {name}
+
+## Actualizar
+
+Puede crear un documento enviando una solicitud PUT al punto final, / api / resource / {doctype} / {nombre}. Esto actúa como una solicitud de PATCH HTTP en la que no tiene que enviar todo el documento sino solo las partes que desea cambiar.
+
+## Borrar
+
+Puede eliminar un documento por su nombre enviando una solicitud DELETE al punto final, / api / resource / {doctype} / {name}.
 
 
 ```js
