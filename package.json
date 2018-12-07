@@ -1,6 +1,6 @@
 {
   "name": "restapi-erpnext",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Modulo para consumir a la API REST de APIRESTERPNext V10+",
   "main": "index.js",
   "scripts": {
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/APIRestERPNextLatino/Restapi_APIRestERPNextonode.git"
+    "url": "git+https://github.com/ERPNextLatino/Restapi_erpnextonode.git"
   },
   "keywords": [],
   "author": "fredyteheranto <fedyteheran91@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RPNextLatino/Restapi_APIRestERPNextonode/issues"
+    "url": "https://github.com/ERPNextLatino/Restapi_erpnextonode/issues"
   },
-  "homepage": "https://github.com/pRPNextLatino/Restapi_APIRestERPNextonode#readme",
+  "homepage": "https://github.com/ERPNextLatino/Restapi_erpnextonode#readme",
   "dependencies": {
     "bluebird": "3.5.0",
     "request": "2.81.0",
