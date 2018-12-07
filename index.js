@@ -43,6 +43,12 @@ APIRESTERPNext.prototype.login = function () {
 }
 
 /**
+ *  Metodo PAra Manejar Usuarios
+ *  @return {Promise} resolve customer list.
+ */
+
+
+/**
  *  Will Call REST API to get customer list.
  *  @return {Promise} resolve customer list.
  */
@@ -730,6 +736,125 @@ APIRESTERPNext.prototype.getPurchaseOrders = function () {
             return _this.getPurchaseOrderByName(PurchaseOrder.name);
         });
     })
+}
+
+/**
+ * Administrando 
+ * @return {Promise} resolve with array of Purchase Order info
+ */
+// Traer usuarios
+APIRESTERPNext.prototype.getUsers = function () {
+    var _this = this;
+    return _this.login().then(function (res) {
+        return requestPromise.get({
+            url: _this.baseUrl + "/api/resource/User",
+            jar: _this.cookieJar
+        }).then(function (customers) {
+            customers = JSON.parse(customers);
+            return customers.data;
+        });
+    });
+}
+// crear usuario
+/* Tener en cuenta el Objeto {
+    "email": "maleddddjapeka26@gmail.com",
+    "first_name": "Mariadd Alejandra Peña de teheran",
+    "last_name": "tehewran",
+    "new_password": "123456"
+}*/
+APIRESTERPNext.prototype.createUSers = function (obj) {
+    var _this = this;
+    var formData = querystring.stringify({
+        data: JSON.stringify(obj)
+    });
+    var contentLength = formData.length;
+    return _this.login().then(function (res) {
+        return requestPromise.post({
+            url: _this.baseUrl + "/api/resource/User",
+            jar: _this.cookieJar,
+            body: formData,
+            headers: {
+                'Content-Length': contentLength,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (customers) {
+            customers = JSON.parse(customers);
+            return customers.data;
+        });
+    });
+}
+
+
+APIRESTERPNext.prototype.sainterpnext = function (recurso, metodo, obj) {
+    var _this = this;
+    console.log(recurso, metodo, obj)
+    if (metodo != 'GET') {
+
+        var formData = querystring.stringify({
+            data: JSON.stringify(obj)
+        });
+        var contentLength = formData.length;
+
+
+    }
+    return _this.login().then(function (res) {
+        switch (metodo) {
+            case 'POST':
+                return requestPromise.post({
+                    url: _this.baseUrl + recurso,
+                    jar: _this.cookieJar,
+                    body: formData,
+                    headers: {
+                        'Content-Length': contentLength,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (customers) {
+                    customers = JSON.parse(customers);
+                    return customers.data;
+                });
+                break;
+            case 'GET':
+                return requestPromise.get({
+                    url: _this.baseUrl + recurso,
+                    jar: _this.cookieJar
+                }).then(function (customers) {
+                    customers = JSON.parse(customers);
+                    return customers.data;
+                });
+                break;
+            case 'PUT':
+                return requestPromise.put({
+                    url: _this.baseUrl + recurso,
+                    jar: _this.cookieJar,
+                    body: formData,
+                    headers: {
+                        'Content-Length': contentLength,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (customers) {
+                    customers = JSON.parse(customers);
+                    return customers.data;
+                });
+                break;
+            case 'DELETE':
+                return requestPromise.delete({
+                    url: _this.baseUrl + recurso,
+                    jar: _this.cookieJar,
+                    body: formData,
+                    headers: {
+                        'Content-Length': contentLength,
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (customers) {
+                    customers = JSON.parse(customers);
+                    return customers.data;
+                });
+
+                break;
+        }
+
+
+    });
 }
 
 module.exports = APIRESTERPNext;
