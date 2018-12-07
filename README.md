@@ -1,10 +1,17 @@
-# node-erpnext
-This library let you call REST API of erpnext.
+# restapi-erpnext 
+Este modulo esta diseñado para consumir a la API REST de APIRESTERPNext V10+ usala para consumir los servicios de su APIRESTERPNext, esta libreria esta realizada apartir de la base y aporte de  pawanpandey4zip y pawangspandey,
+basandonos en la documentacion de frape y dandole opcion a los desarrolladores MEAN se hace publica esta libreria con el fin de reusarla y mejorarla 
+
+# Introducción
+Frappe.io se envía con una API HTTP que se puede clasificar en Llamadas a procedimiento remoto (RPC), para llamar a los métodos de la lista blanca y la transferencia de estado representacional (REST), para manipular recursos.
+
+La URL base es https: // {su instancia de frappe}. Todas las solicitudes que se muestran aquí deben agregarse al final de su URL base. Por ejemplo, si su instancia es demo.erpnext.com, GET / api / resource / User significa GET https://demo.erpnext.com/api/resource/User.
+
 
 ```js
-var ERPNext = require('node-erpnext');
+var APIRESTERPNext = require('restapi-erpnext');
 
-var erpnext = new ERPNext({
+var APIRESTERPNext = new APIRESTERPNext({
     username : 'username',
     password : 'password',
     baseUrl  : 'http://localhost:8000'
@@ -15,7 +22,7 @@ var erpnext = new ERPNext({
 ## Installation
 
 ```bash
-$ npm install node-erpnext
+$ npm install restapi-erpnext
 ```
 
 ## Customers
@@ -24,7 +31,7 @@ Get list of customers
 
 ```js 
 
-erpnext.getCustomers().then(function(customers){
+APIRESTERPNext.getCustomers().then(function(customers){
     console.log(customers);
 })
 
@@ -33,7 +40,7 @@ Get customer's name list.
 
 ```js
 
-erpnext.getCustomersName().then(function(customers){
+APIRESTERPNext.getCustomersName().then(function(customers){
     console.log(customers);
 })
 
@@ -42,16 +49,16 @@ Get customer's info by customer name
 
 ```js
 
- erpnext.getCustomerByName('ram').then(function(customer){
+ APIRESTERPNext.getCustomerByName('ram').then(function(customer){
      console.log(customer);
  })
 
 ```
-Create customer for parameters follow [this](https://frappe.github.io/erpnext/current/models/selling/customer).
+Create customer for parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resource/selling/customer).
 
 ```js
 
-  erpnext.createCustomer({
+  APIRESTERPNext.createCustomer({
     "naming_series": "CUST-",
     "customer_group": "Commercial",
     "doctype": "Customer",
@@ -65,11 +72,11 @@ Create customer for parameters follow [this](https://frappe.github.io/erpnext/cu
   })
 
 ```
-update customer by name. for parameters follow [this](https://frappe.github.io/erpnext/current/models/selling/customer).
+update customer by name. for parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resource/selling/customer).
 
 ```js
 
-  erpnext.updateCustomerByName('ram',{
+  APIRESTERPNext.updateCustomerByName('ram',{
     "customer_name": "shyam",
   })
 
@@ -78,11 +85,11 @@ update customer by name. for parameters follow [this](https://frappe.github.io/e
 ## Customer Group
 
 Create a new customer group.
-For parameters follow [this](https://frappe.github.io/erpnext/current/models/setup/customer_group).
+For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resource/setup/customer_group).
 
 ```js
 
-  erpnext.createCustomerGroup({
+  APIRESTERPNext.createCustomerGroup({
      'customer_group_name' : 'new Group',
     'parent_customer_group': 'All Customer Groups',
     'is_group': 'No'
@@ -91,11 +98,11 @@ For parameters follow [this](https://frappe.github.io/erpnext/current/models/set
 ```
 
 update an existing customer group by group name.
-For parameters follow [this](https://frappe.github.io/erpnext/current/models/setup/customer_group).
+For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resource/setup/customer_group).
 
 ```js
 
-  erpnext.updateCustomerGroupByName('new Group',{
+  APIRESTERPNext.updateCustomerGroupByName('new Group',{
     'customer_group_name' : 'new group',
     'parent_customer_group': 'All Customer Groups',
     'is_group': 'No'
@@ -107,7 +114,7 @@ Get list of customer groups.
 
 ```js 
 
-erpnext.getCustomerGroups().then(function(customerGroups){
+APIRESTERPNext.getCustomerGroups().then(function(customerGroups){
     console.log(customerGroups);
 })
 
@@ -116,7 +123,7 @@ Get customer group's name list.
 
 ```js
 
-erpnext.getCustomerGroupsName().then(function(customerGroups){
+APIRESTERPNext.getCustomerGroupsName().then(function(customerGroups){
     console.log(customerGroups);
 })
 
@@ -125,7 +132,7 @@ Get customer group's info by group name
 
 ```js
 
- erpnext.getCustomerGroupByName('new Group').then(function(customerGroups){
+ APIRESTERPNext.getCustomerGroupByName('new Group').then(function(customerGroups){
      console.log(customerGroups);
  })
 
@@ -135,11 +142,11 @@ Get customer group's info by group name
 
 
 Create a Sales Order.
-For parameters follow [this](https://frappe.github.io/erpnext/current/models/selling/sales_order).
+For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resource/selling/sales_order).
 
 ```js
 
-  erpnext.createSalesOrder({
+  APIRESTERPNext.createSalesOrder({
     "status": "Draft",
     "naming_series": "SO-",
     "currency": "INR",
@@ -165,10 +172,10 @@ For parameters follow [this](https://frappe.github.io/erpnext/current/models/sel
 ```
 
 update an existing sales order by sales order name.
-For parameters follow [this](https://frappe.github.io/erpnext/current/models/selling/sales_order).
+For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resource/selling/sales_order).
 ```js
 
-  erpnext.updateSalesOrderByName('SO-00003',{
+  APIRESTERPNext.updateSalesOrderByName('SO-00003',{
     "status": "Submitted",
     "docstatus" : 1
   })
@@ -179,7 +186,7 @@ Get list of sales order.
 
 ```js 
 
-erpnext.getSalesOrder().then(function(salesOrder){
+APIRESTERPNext.getSalesOrder().then(function(salesOrder){
     console.log(salesOrder);
 })
 
@@ -188,7 +195,7 @@ Get sales order's name list.
 
 ```js
 
-erpnext.getSalesOrdersName().then(function(salesOrder){
+APIRESTERPNext.getSalesOrdersName().then(function(salesOrder){
     console.log(salesOrder);
 })
 
@@ -197,7 +204,7 @@ Get sales order's info by order name
 
 ```js
 
- erpnext.getSalesOrderByName('new Group').then(function(customer){
+ APIRESTERPNext.getSalesOrderByName('new Group').then(function(customer){
      console.log(customer);
  })
 
@@ -206,11 +213,11 @@ Get sales order's info by order name
 ## Item
 
 Create an Item.
-For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice_item.
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/accounts/sales_invoice_item.
 
 ```js
 
-  erpnext.createAnItem({
+  APIRESTERPNext.createAnItem({
     "has_variants": 0,
     "is_stock_item": "No",
     "valuation_method": "",
@@ -231,11 +238,11 @@ For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_
 ```
 
 Update an Item.
-For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/selling/sales_order
 
 ```js
 
-erpnext.updateItemByName("item code",{
+APIRESTERPNext.updateItemByName("item code",{
     "has_variants": 0,
     "is_stock_item": "No",
     "valuation_method": "",
@@ -258,19 +265,19 @@ erpnext.updateItemByName("item code",{
 ## Supplier
 
 Create a Supplier.
-For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/buying/supplier.
 
 ```js
 
-erpnext.createSupplier({"supplier_type":"Services","supplier_name":"ram"});
+APIRESTERPNext.createSupplier({"supplier_type":"Services","supplier_name":"ram"});
 
 ```
 Update Supplier.
-For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/buying/supplier.
 
 ```js
 
-  erpnext.updateSupplierByName("ram",{
+  APIRESTERPNext.updateSupplierByName("ram",{
     "supplier_type":"Services",
     "supplier_name":"ram"
   })
@@ -280,11 +287,11 @@ For param follow https://frappe.github.io/erpnext/current/models/buying/supplier
 ## Purchase Invoice
 
 Create a Purchase Invoice
-For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/accounts/purchase_invoice
 
 ```js
 
-  erpnext.createPurchaseInvoice({
+  APIRESTERPNext.createPurchaseInvoice({
       "supplier": "ram",
 
       "items": [{
@@ -298,11 +305,11 @@ For param follow https://frappe.github.io/erpnext/current/models/accounts/purcha
 ```
 
 Update Purchase Invoice.
-For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice.
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/accounts/purchase_invoice.
 
 ```js
 
-  erpnext.updatePurchaseInvoiceByName("name",{
+  APIRESTERPNext.updatePurchaseInvoiceByName("name",{
     "supplier": "ram"
   })
 
@@ -311,11 +318,11 @@ For param follow https://frappe.github.io/erpnext/current/models/accounts/purcha
 ## Sales Invoice
 
 Create a Sales Invoice.
-For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/accounts/sales_invoice
 
 ```js
 
-  erpnext.createSalesInvoice(
+  APIRESTERPNext.createSalesInvoice(
     {
     "due_date": "2017-05-14",
      "customer": "ram",
@@ -329,11 +336,11 @@ For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_
 
 ```
  Update Sales Invoice.
- For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+ For param follow https://frappe.github.io/APIRESTERPNext/api/resource/accounts/sales_invoice
 
 ```js
 
-  erpnext.updateSalesInvoiceByName(
+  APIRESTERPNext.updateSalesInvoiceByName(
     "Sales Invoice",
 
     {
@@ -351,11 +358,11 @@ For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_
 ## Purchase Order
 
 Create a Purchase Order.
-For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+For param follow https://frappe.github.io/APIRESTERPNext/api/resource/buying/purchase_order
 
 ```js
 
-  erpnext.createPurchaseOrder({
+  APIRESTERPNext.createPurchaseOrder({
      "supplier": "ram",
      "items": [{
 
@@ -370,11 +377,11 @@ For param follow https://frappe.github.io/erpnext/current/models/buying/purchase
 ```
 
  Update Purchase Order.
- For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+ For param follow https://frappe.github.io/APIRESTERPNext/api/resource/buying/purchase_order
 
  ```js
 
-  erpnext.updatePurchaseOrderByName("name",{
+  APIRESTERPNext.updatePurchaseOrderByName("name",{
          "supplier": "ram",
           "items": [{
 
@@ -392,7 +399,7 @@ For param follow https://frappe.github.io/erpnext/current/models/buying/purchase
 
  ```js
 
-  erpnext.getPurchaseOrders()
+  APIRESTERPNext.getPurchaseOrders()
   .then(function(data){ console.log(data) })
 
  ```
@@ -401,7 +408,7 @@ For param follow https://frappe.github.io/erpnext/current/models/buying/purchase
 
  ```js
 
-  erpnext.getPurchaseOrderByName('PO-00003')
+  APIRESTERPNext.getPurchaseOrderByName('PO-00003')
   .then(function(data){ console.log(data) })
 
  ```
@@ -410,7 +417,7 @@ Get List of purchase orders
 
 ```js
 
-erpnext.getPurchaseOrdersName()
+APIRESTERPNext.getPurchaseOrdersName()
 .then(function(data){ console.log(data) })
 
 ```

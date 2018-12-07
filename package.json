@@ -1,22 +1,22 @@
 {
-  "name": "node-erpnext",
-  "version": "1.4.0",
-  "description": "This library let you call REST API of erpnext.",
+  "name": "restapi-erpnext",
+  "version": "1.0.1",
+  "description": "Modulo para consumir a la API REST de APIRESTERPNext V10+",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pawangspandey/node_erpnext.git"
+    "url": "git+https://github.com/APIRestERPNextLatino/Restapi_APIRestERPNextonode.git"
   },
   "keywords": [],
-  "author": "pawan <pawang.s.pandey@gmail.com>",
+  "author": "fredyteheranto <fedyteheran91@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pawangspandey/node_erpnext/issues"
+    "url": "https://github.com/RPNextLatino/Restapi_APIRestERPNextonode/issues"
   },
-  "homepage": "https://github.com/pawangspandey/node_erpnext#readme",
+  "homepage": "https://github.com/pRPNextLatino/Restapi_APIRestERPNextonode#readme",
   "dependencies": {
     "bluebird": "3.5.0",
     "request": "2.81.0",

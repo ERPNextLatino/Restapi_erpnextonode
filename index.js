@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- *  ERPNext class will exports public api.
+ *  APIRESTERPNext class will exports public api.
  */
 
 var request = require('request');
@@ -9,14 +9,14 @@ var requestPromise = require('request-promise');
 var querystring = require('querystring');
 var Promise = require('bluebird');
 
-var ERPNext = function (options) {
+var APIRESTERPNext = function (options) {
     this.username = options.username;
     this.password = options.password;
     this.baseUrl = options.baseUrl;
     this.cookieJar = request.jar();
 };
 
-ERPNext.prototype.constructor = ERPNext;
+APIRESTERPNext.prototype.constructor = APIRESTERPNext;
 
 
 /**
@@ -24,9 +24,12 @@ ERPNext.prototype.constructor = ERPNext;
  *  @return {Promise} resolve response.
  */
 
-ERPNext.prototype.login = function () {
+APIRESTERPNext.prototype.login = function () {
     var _this = this;
-    var formData = querystring.stringify({ usr: _this.username, pwd: _this.password });
+    var formData = querystring.stringify({
+        usr: _this.username,
+        pwd: _this.password
+    });
     var contentLength = formData.length;
     return requestPromise.post({
         url: _this.baseUrl + "/api/method/login",
@@ -44,7 +47,7 @@ ERPNext.prototype.login = function () {
  *  @return {Promise} resolve customer list.
  */
 
-ERPNext.prototype.getCustomersName = function () {
+APIRESTERPNext.prototype.getCustomersName = function () {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
@@ -62,7 +65,7 @@ ERPNext.prototype.getCustomersName = function () {
  *  @param {String} name name of the customer.
  */
 
-ERPNext.prototype.getCustomerByName = function (name) {
+APIRESTERPNext.prototype.getCustomerByName = function (name) {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
@@ -77,14 +80,16 @@ ERPNext.prototype.getCustomerByName = function (name) {
 
 /**
  *  Will Call REST API to create customer.
- *  for parameters follow https://frappe.github.io/erpnext/current/models/selling/customer
+ *  for parameters follow https://frappe.github.io/APIRESTERPNext/current/models/selling/customer
  *  @param  {Object} customerData customer data object.
  *  @return {Promise} resolve with customer data.
  */
 
-ERPNext.prototype.createCustomer = function (object) {
+APIRESTERPNext.prototype.createCustomer = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -107,7 +112,7 @@ ERPNext.prototype.createCustomer = function (object) {
  * @return {Promise} resolve with array of clients info
  */
 
-ERPNext.prototype.getCustomers = function () {
+APIRESTERPNext.prototype.getCustomers = function () {
     var _this = this;
     return _this.getCustomersName().then(function (customers) {
         return Promise.map(customers, function (customer) {
@@ -123,13 +128,15 @@ ERPNext.prototype.getCustomers = function () {
  *  @return {Promise} resolve with customer data.
  */
 
-ERPNext.prototype.updateCustomerByName = function(name, object){
+APIRESTERPNext.prototype.updateCustomerByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Customer/"+ name,
+            url: _this.baseUrl + "/api/resource/Customer/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -148,14 +155,16 @@ ERPNext.prototype.updateCustomerByName = function(name, object){
 
 /**
  * Create Customer Group.
- * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/setup/customer_group
  * @param {Object} object customer group data.
  * @return {Promise} resolve with customer group data. 
  */
 
-ERPNext.prototype.createCustomerGroup = function(object){
+APIRESTERPNext.prototype.createCustomerGroup = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -176,19 +185,21 @@ ERPNext.prototype.createCustomerGroup = function(object){
 
 /**
  * Update Customer Group by name.
- * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/setup/customer_group
  * @param {String} name customer group name.
  * @param {Object} object customer group data.
  * @return {Promise} resolve with customer group data. 
  */
 
-ERPNext.prototype.updateCustomerGroupByName = function(name, object){
+APIRESTERPNext.prototype.updateCustomerGroupByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Customer Group/"+name,
+            url: _this.baseUrl + "/api/resource/Customer Group/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -205,12 +216,12 @@ ERPNext.prototype.updateCustomerGroupByName = function(name, object){
 
 /**
  * Get Customer Group's name.
- * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/setup/customer_group
  * @param {Object} object customer group data.
  * @return {Promise} resolve with customer group data. 
  */
 
-ERPNext.prototype.getCustomerGroupsName = function(){
+APIRESTERPNext.prototype.getCustomerGroupsName = function () {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
@@ -225,16 +236,16 @@ ERPNext.prototype.getCustomerGroupsName = function(){
 
 /**
  * Get Customer Group's info by name.
- * For param follow https://frappe.github.io/erpnext/current/models/setup/customer_group
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/setup/customer_group
  * @param {String} name customer group's name.
  * @return {Promise} resolve with customer group data.
  */
 
-ERPNext.prototype.getCustomerGroupByName = function(name){
+APIRESTERPNext.prototype.getCustomerGroupByName = function (name) {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
-            url: _this.baseUrl + "/api/resource/Customer Group/"+ name,
+            url: _this.baseUrl + "/api/resource/Customer Group/" + name,
             jar: _this.cookieJar,
         }).then(function (customer) {
             customer = JSON.parse(customer);
@@ -248,7 +259,7 @@ ERPNext.prototype.getCustomerGroupByName = function(name){
  *  @return {Promise} resolve customer group data array.
  */
 
-ERPNext.prototype.getCustomerGroups = function(){
+APIRESTERPNext.prototype.getCustomerGroups = function () {
     var _this = this;
     return _this.getCustomerGroupsName().then(function (customersGroups) {
         return Promise.map(customersGroups, function (group) {
@@ -263,7 +274,7 @@ ERPNext.prototype.getCustomerGroups = function(){
  *  @return {Promise} resolve customer group data array.
  */
 
-ERPNext.prototype.getSalesOrdersName = function () {
+APIRESTERPNext.prototype.getSalesOrdersName = function () {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
@@ -283,11 +294,11 @@ ERPNext.prototype.getSalesOrdersName = function () {
  *  @return {Promise} resolve customer group data array.
  */
 
-ERPNext.prototype.getSalesOrderByName = function (name) {
+APIRESTERPNext.prototype.getSalesOrderByName = function (name) {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
-            url: _this.baseUrl + "/api/resource/Sales Order/"+name,
+            url: _this.baseUrl + "/api/resource/Sales Order/" + name,
             jar: _this.cookieJar,
         }).then(function (salesOrder) {
             salesOrder = JSON.parse(salesOrder);
@@ -302,7 +313,7 @@ ERPNext.prototype.getSalesOrderByName = function (name) {
  * @return {Promise} resolve Sales Orders array list.
  */
 
-ERPNext.prototype.getSalesOrder = function(){
+APIRESTERPNext.prototype.getSalesOrder = function () {
     var _this = this;
     return _this.getSalesOrdersName().then(function (salesOrders) {
         return Promise.map(salesOrders, function (saleOrder) {
@@ -314,14 +325,16 @@ ERPNext.prototype.getSalesOrder = function(){
 
 /**
  * Create Sales Order.
- * For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/selling/sales_order
  * @param {Object} object Sales Order.
  * @return {Promise} resolve Created Sales Order.
  */
 
-ERPNext.prototype.createSalesOrder = function(object){
+APIRESTERPNext.prototype.createSalesOrder = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -342,19 +355,21 @@ ERPNext.prototype.createSalesOrder = function(object){
 
 /**
  * Update Sales Order by name.
- * For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/selling/sales_order
  * @param {String} name name of the sales order.
  * @param {Object} object data of sales order.
  * @return {Promise} resolve Created Sales Order.
  */
 
-ERPNext.prototype.updateSalesOrderByName = function(name, object){
+APIRESTERPNext.prototype.updateSalesOrderByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Sales Order/"+name,
+            url: _this.baseUrl + "/api/resource/Sales Order/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -370,14 +385,16 @@ ERPNext.prototype.updateSalesOrderByName = function(name, object){
 
 /**
  * Create an Item.
- * For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice_item.
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/accounts/sales_invoice_item.
  * @param {Object} object item object.
  * @return {Promise} resolve Created item.
  */
 
-ERPNext.prototype.createAnItem = function(object){
+APIRESTERPNext.prototype.createAnItem = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -397,19 +414,21 @@ ERPNext.prototype.createAnItem = function(object){
 
 /**
  * Update an Item.
- * For param follow https://frappe.github.io/erpnext/current/models/selling/sales_order
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/selling/sales_order
  * @param {String} name name of the item.
  * @param {Object} object data of item.
  * @return {Promise} resolve updated item
  */
 
-ERPNext.prototype.updateItemByName = function(name, object){
+APIRESTERPNext.prototype.updateItemByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Item/"+name,
+            url: _this.baseUrl + "/api/resource/Item/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -426,14 +445,16 @@ ERPNext.prototype.updateItemByName = function(name, object){
 
 /**
  * Create a Supplier.
- * For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/buying/supplier.
  * @param {Object} object Supplier object.
  * @return {Promise} resolve Created Supplier.
  */
 
-ERPNext.prototype.createSupplier = function(object){
+APIRESTERPNext.prototype.createSupplier = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -453,19 +474,21 @@ ERPNext.prototype.createSupplier = function(object){
 
 /**
  * Update Supplier.
- * For param follow https://frappe.github.io/erpnext/current/models/buying/supplier.
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/buying/supplier.
  * @param {String} name name of the Supplier.
  * @param {Object} object data of Supplier.
  * @return {Promise} resolve updated Supplier
  */
 
-ERPNext.prototype.updateSupplierByName = function(name, object){
+APIRESTERPNext.prototype.updateSupplierByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Supplier/"+name,
+            url: _this.baseUrl + "/api/resource/Supplier/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -481,14 +504,16 @@ ERPNext.prototype.updateSupplierByName = function(name, object){
 
 /**
  * Create a Purchase Invoice.
- * For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice.
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/accounts/purchase_invoice.
  * @param {Object} object Purchase Invoice  object.
  * @return {Promise} resolve Created Purchase Invoice .
  */
 
-ERPNext.prototype.createPurchaseInvoice = function(object){
+APIRESTERPNext.prototype.createPurchaseInvoice = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -499,7 +524,7 @@ ERPNext.prototype.createPurchaseInvoice = function(object){
                 'Content-Length': contentLength,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(function (PurchaseInvoice ) {
+        }).then(function (PurchaseInvoice) {
             PurchaseInvoice = JSON.parse(PurchaseInvoice);
             return PurchaseInvoice.data;
         })
@@ -508,19 +533,21 @@ ERPNext.prototype.createPurchaseInvoice = function(object){
 
 /**
  * Update Purchase Invoice.
- * For param follow https://frappe.github.io/erpnext/current/models/accounts/purchase_invoice.
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/accounts/purchase_invoice.
  * @param {String} name name of the Purchase Invoice.
  * @param {Object} object data of Purchase Invoice.
  * @return {Promise} resolve updated Purchase Invoice.
  */
 
-ERPNext.prototype.updatePurchaseInvoiceByName = function(name, object){
+APIRESTERPNext.prototype.updatePurchaseInvoiceByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Purchase Invoice/"+name,
+            url: _this.baseUrl + "/api/resource/Purchase Invoice/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -536,14 +563,16 @@ ERPNext.prototype.updatePurchaseInvoiceByName = function(name, object){
 
 /**
  * Create a Sales Invoice.
- * For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/accounts/sales_invoice
  * @param {Object} object Sales Invoice  object.
  * @return {Promise} resolve Created Sales Invoice.
  */
 
-ERPNext.prototype.createSalesInvoice = function(object){
+APIRESTERPNext.prototype.createSalesInvoice = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -554,7 +583,7 @@ ERPNext.prototype.createSalesInvoice = function(object){
                 'Content-Length': contentLength,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(function (SalesInvoice ) {
+        }).then(function (SalesInvoice) {
             SalesInvoice = JSON.parse(SalesInvoice);
             return SalesInvoice.data;
         })
@@ -563,19 +592,21 @@ ERPNext.prototype.createSalesInvoice = function(object){
 
 /**
  * Update Sales Invoice.
- * For param follow https://frappe.github.io/erpnext/current/models/accounts/sales_invoice
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/accounts/sales_invoice
  * @param {String} name name of the Sales Invoice.
  * @param {Object} object data of Sales Invoice.
  * @return {Promise} resolve updated Sales Invoice.
  */
 
-ERPNext.prototype.updateSalesInvoiceByName = function(name, object){
+APIRESTERPNext.prototype.updateSalesInvoiceByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Sales Invoice/"+name,
+            url: _this.baseUrl + "/api/resource/Sales Invoice/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -591,14 +622,16 @@ ERPNext.prototype.updateSalesInvoiceByName = function(name, object){
 
 /**
  * Create a Purchase Order.
- * For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/buying/purchase_order
  * @param {Object} object Purchase Order object.
  * @return {Promise} resolve Created Purchase Order.
  */
 
-ERPNext.prototype.createPurchaseOrder = function(object){
+APIRESTERPNext.prototype.createPurchaseOrder = function (object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.post({
@@ -609,7 +642,7 @@ ERPNext.prototype.createPurchaseOrder = function(object){
                 'Content-Length': contentLength,
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(function (SalesInvoice ) {
+        }).then(function (SalesInvoice) {
             SalesInvoice = JSON.parse(SalesInvoice);
             return SalesInvoice.data;
         })
@@ -618,19 +651,21 @@ ERPNext.prototype.createPurchaseOrder = function(object){
 
 /**
  * Update Purchase Order.
- * For param follow https://frappe.github.io/erpnext/current/models/buying/purchase_order
+ * For param follow https://frappe.github.io/APIRESTERPNext/current/models/buying/purchase_order
  * @param {String} name name of the Purchase Order.
  * @param {Object} object data of Purchase Order.
  * @return {Promise} resolve updated Purchase Order.
  */
 
-ERPNext.prototype.updatePurchaseOrderByName = function(name, object){
+APIRESTERPNext.prototype.updatePurchaseOrderByName = function (name, object) {
     var _this = this;
-    var formData = querystring.stringify({ data: JSON.stringify(object) });
+    var formData = querystring.stringify({
+        data: JSON.stringify(object)
+    });
     var contentLength = formData.length;
     return _this.login().then(function (res) {
         return requestPromise.put({
-            url: _this.baseUrl + "/api/resource/Purchase Order/"+name,
+            url: _this.baseUrl + "/api/resource/Purchase Order/" + name,
             jar: _this.cookieJar,
             body: formData,
             headers: {
@@ -651,7 +686,7 @@ ERPNext.prototype.updatePurchaseOrderByName = function(name, object){
  *  @return {Promise} resolve Purchase Order list.
  */
 
-ERPNext.prototype.getPurchaseOrdersName = function () {
+APIRESTERPNext.prototype.getPurchaseOrdersName = function () {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
@@ -669,7 +704,7 @@ ERPNext.prototype.getPurchaseOrdersName = function () {
  *  @param {String} name name of the Purchase Order.
  */
 
-ERPNext.prototype.getPurchaseOrderByName = function (name) {
+APIRESTERPNext.prototype.getPurchaseOrderByName = function (name) {
     var _this = this;
     return _this.login().then(function (res) {
         return requestPromise.get({
@@ -688,7 +723,7 @@ ERPNext.prototype.getPurchaseOrderByName = function (name) {
  * @return {Promise} resolve with array of Purchase Order info
  */
 
-ERPNext.prototype.getPurchaseOrders = function () {
+APIRESTERPNext.prototype.getPurchaseOrders = function () {
     var _this = this;
     return _this.getPurchaseOrdersName().then(function (PurchaseOrders) {
         return Promise.map(PurchaseOrders, function (PurchaseOrder) {
@@ -697,5 +732,4 @@ ERPNext.prototype.getPurchaseOrders = function () {
     })
 }
 
-module.exports = ERPNext;
-
+module.exports = APIRESTERPNext;
