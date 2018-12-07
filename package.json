@@ -1,6 +1,6 @@
 {
   "name": "restapi-erpnext",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Modulo para consumir a la API REST de APIRESTERPNext V10+",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/ERPNextLatino/Restapi_erpnextonode.git"
   },
-  "keywords": [],
+  "keywords": ["erpnext", "sainterp", "nodejs", "clientapi", "colombia", "barranquilla", "js", "javascript"],
   "author": "fredyteheranto <fedyteheran91@gmail.com>",
   "license": "MIT",
   "bugs": {

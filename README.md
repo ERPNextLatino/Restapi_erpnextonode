@@ -64,11 +64,6 @@ Nota: Si deseas enviar mas parametros en el HEADER de la peticion Escribeme : fr
 APIRESTERPNext.sainterpnext('/api/resource/User', 'GET', null).then(function (res) {
   console.log('Resultado', res);
 })
-
-APIRESTERPNext.sainterpnext('api/method/frappe.auth.get_logged_user', 'GET', null).then(function (res) {
-  console.log('Resultado', res);
-})
-
 //Puedes Probar los demas Metodos.
 ```
 
