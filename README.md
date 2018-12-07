@@ -84,7 +84,7 @@ Create customer for parameters follow [this](https://frappe.github.io/APIRESTERP
     "customer_type": "Company",
     "accounts": [],
     "docstatus": 0,
-    "territory": "India",
+    "territory": "Colombia",
     "sales_team": [],
     "customer_name": "ram"
   })
@@ -95,7 +95,7 @@ update customer by name. for parameters follow [this](https://frappe.github.io/A
 ```js
 
   APIRESTERPNext.updateCustomerByName('ram',{
-    "customer_name": "shyam",
+    "customer_name": "fredy teheran",
   })
 
 ```
@@ -108,8 +108,8 @@ For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resourc
 ```js
 
   APIRESTERPNext.createCustomerGroup({
-     'customer_group_name' : 'new Group',
-    'parent_customer_group': 'All Customer Groups',
+     'customer_group_name' : 'Nuevo Grupo',
+    'parent_customer_group': 'Todos los grupos de clientes',
     'is_group': 'No'
   })
 
@@ -120,9 +120,9 @@ For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resourc
 
 ```js
 
-  APIRESTERPNext.updateCustomerGroupByName('new Group',{
-    'customer_group_name' : 'new group',
-    'parent_customer_group': 'All Customer Groups',
+  APIRESTERPNext.updateCustomerGroupByName('Nuevo Grupo',{
+    'customer_group_name' : 'Nuevo Grupo',
+    'parent_customer_group': 'Todos los grupos de clientes',
     'is_group': 'No'
   })
 
@@ -150,7 +150,7 @@ Get customer group's info by group name
 
 ```js
 
- APIRESTERPNext.getCustomerGroupByName('new Group').then(function(customerGroups){
+ APIRESTERPNext.getCustomerGroupByName('Nuevo Grupo').then(function(customerGroups){
      console.log(customerGroups);
  })
 
@@ -165,14 +165,14 @@ For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resourc
 ```js
 
   APIRESTERPNext.createSalesOrder({
-    "status": "Draft",
+    "status": "Borrador",
     "naming_series": "SO-",
-    "currency": "INR",
-    "billing_status": "Not Billed",
+    "currency": "COP",
+    "billing_status": "No facturado",
     "order_type": "Sales",
     "transaction_date": "2017-05-10",
-    "territory": "India",
-    "delivery_status": "Not Delivered",
+    "territory": "Colombia",
+    "delivery_status": "No enviado",
     "customer": "Camelport Internal",
     "items": [
       {
@@ -183,7 +183,7 @@ For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resourc
         "parentfield": "items"
       }
     ],
-    "delivery_date": "2017-05-18",
+    "delivery_date": "2018-12-07",
     "sales_team": []
   })
 
@@ -194,7 +194,7 @@ For parameters follow [this](https://frappe.github.io/APIRESTERPNext/api/resourc
 ```js
 
   APIRESTERPNext.updateSalesOrderByName('SO-00003',{
-    "status": "Submitted",
+    "status": "Enviado",
     "docstatus" : 1
   })
 
@@ -222,7 +222,7 @@ Get sales order's info by order name
 
 ```js
 
- APIRESTERPNext.getSalesOrderByName('new Group').then(function(customer){
+ APIRESTERPNext.getSalesOrderByName('Nuevo Grupo').then(function(customer){
      console.log(customer);
  })
 
