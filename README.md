@@ -50,11 +50,11 @@ Los Argumentos de la funcion trabajan de la siguiente manera
 
 '/api/resource/User', 'GET', null
 
-1. Recurso a Utilizar
+1. Recurso a Utilizar (Este puede ser de tipo '/api/resource/User' o 'api/method/frappe.auth.get_logged_user')
 2. Metodo (GET, GETID ,POST,PUT,DELETE)
 3. Parametros del recurso; En dado caso que sea tipo  GET  Este ultimo se envia NUll para los demas caso este es Obligatorio, Si intentas Acceder al recurso enviando los parametros nullos Devolvera Error *500 
 
-
+Nota: Si deseas enviar mas parametros en el HEADER de la peticion Escribeme : fredyteheran91@gmail.com
 
 
 ```js
@@ -62,6 +62,10 @@ Los Argumentos de la funcion trabajan de la siguiente manera
 //Vamos a traer todos los Usuarios Registrados en NUestro ERP  
 
 APIRESTERPNext.sainterpnext('/api/resource/User', 'GET', null).then(function (res) {
+  console.log('Resultado', res);
+})
+
+APIRESTERPNext.sainterpnext('api/method/frappe.auth.get_logged_user', 'GET', null).then(function (res) {
   console.log('Resultado', res);
 })
 
