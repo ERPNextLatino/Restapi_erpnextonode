@@ -41,6 +41,23 @@ APIRESTERPNext.prototype.login = function () {
         }
     });
 }
+APIRESTERPNext.prototype.loginUser = function (req) {
+    var _this = req;
+    var formData = querystring.stringify({
+        usr: _this.username,
+        pwd: _this.password
+    });
+    var contentLength = formData.length;
+    return requestPromise.post({
+        url: _this.baseUrl + "/api/method/login",
+        jar: _this.cookieJar,
+        body: formData,
+        headers: {
+            'Content-Length': contentLength,
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    });
+}
 
 /**
  *  Metodo PAra Manejar Usuarios
