@@ -1,6 +1,6 @@
 {
   "name": "restapi-erpnext",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Modulo para consumir a la API REST de APIRESTERPNext V10+",
   "main": "index.js",
   "scripts": {
